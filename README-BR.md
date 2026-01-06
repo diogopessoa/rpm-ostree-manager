@@ -10,7 +10,7 @@
 [![Aurora](https://img.shields.io/badge/Compatible-Aurora-db6383?)](https://github.com/ublue-os/aurora)
 
 # Tabela de Conteúdo
-* [🇺🇸](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md
+* [🇺🇸](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md)
 * [Tabela de Conteúdo](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#tabela-de-conteudo)
   - [Sobre e Funcionalidades](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#sobre-e-funcionalidades)
   - [Como instalar](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#como-instalar)
@@ -31,7 +31,7 @@ Uma ferramenta CLI simples e intuitiva para instalar e gerenciar pacotes RPM loc
 Execute o seguinte comando para instalar o RPM-OSTree Manager automaticamente:
 
 ```bash
-curl -fsSL [https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/install.sh](https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/install.sh) | bash
+curl -fsSL [https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/install.sh | bash
 ```
 
 **Tudo pronto!** Após a instalação concluída com sucesso, você já pode encontrar o **RPM-OSTree Manager** no seu menu de aplicativos ou digitar `rom` no terminal.
@@ -47,6 +47,6 @@ sudo rm /usr/local/bin/rom && rm ~/.local/share/applications/rpm-ostree-manager.
 ## Créditos e Licença
 
 * **MIT License:** Licenciado sob a [MIT License](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/LICENSE).
-* **Ícone:** O ícone utilizado faz parte do projeto [Kora Icons](https://github.com/bikass/kora), licenciado sob a GPL-3.0.
+* **Ícone:** Faz parte do projeto [Kora Icons](https://github.com/bikass/kora), licenciado sob a GPL-3.0.
 
 
