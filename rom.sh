@@ -26,10 +26,10 @@ NC='\033[0m'
 
 show_menu() {
     clear
-    echo -e "${BLUE}=======================================${NC}"
-    echo -e "${GREEN}       RPM-OSTree Manager${NC}"
-    echo -e "  github.com/diogopessoa/rpm-ostree-manager/"
-    echo -e "${BLUE}=======================================${NC}"
+    echo -e "${BLUE}╭────────────────────────────────────╮${NC}"
+    echo -e "${GREEN}          ${BOLD}RPM-OSTree Manager${NC}"
+    echo -e "${BLUE}╰────────────────────────────────────╯${NC}\n"
+    echo -e "Welcome!"
     echo -e "\nChoose an option:"
     echo -e "1) ${BLUE}Install${NC} Local RPM (Downloads)"
     echo -e "2) ${RED}Remove${NC} Layered/Local RPM"
@@ -115,7 +115,17 @@ while true; do
         2) remove_rpm ;;
         3) rollback ;;
         4) clear; rpm-ostree status; echo ""; read -p "Press Enter..." ;;
-        0) echo "Exiting..."; exit 0 ;;
-        *) echo -e "${RED}Invalid option!${NC}"; sleep 1 ;;
+        0)
+            clear
+            echo
+            echo -e "   Follow for updates:"
+            echo -e "   github.com/diogopessoa/rpm-ostree-manager"
+            echo -e "${BLUE}---------------------------------------------${NC}"
+            exit 0 
+            ;;
+        *)
+            echo -e "${RED}Invalid option!${NC}"
+            sleep 1
+            ;;
     esac
 done
