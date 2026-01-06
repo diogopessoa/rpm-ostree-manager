@@ -30,7 +30,7 @@ A simple and intuitive CLI tool to install and manage local and layered RPM pack
 Run the following command to install RPM-OSTree Manager automatically:
 
 ```bash
-curl -fsSL [https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/install.sh](https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/install.sh) | bash
+curl -fsSL https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/install.sh | bash
 ```
 
 **All done!** Once the installation is successful, you can find **RPM-OSTree Manager** in your application menu or simply type `rom` in your terminal.
