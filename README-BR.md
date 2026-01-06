@@ -65,7 +65,7 @@ curl -fsSL https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main
 Se você quiser remover o RPM-OSTree Manager, execute o commando:
 
 ```bash
-sudo rm /usr/local/bin/rom && rm ~/.local/share/applications/rpm-ostree-manager.desktop ~/.local/share/icons/rpm-ostree-manager.svg
+sudo rm /usr/local/bin/rom && rm ~/.local/share/applications/rpm-ostree-manager.desktop ~/.local/share/icons/rpm-ostree-manager.svg && echo "RPM-OSTree Manager has been successfully uninstalled."
 ```
 
 ## Créditos e Licença
