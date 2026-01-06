@@ -11,6 +11,7 @@
 [🇺🇸 English](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷 Português](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md)
 * [Tabela de Conteúdo](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#tabela-de-conteudo)
   - [Sobre e Funcionalidades](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#sobre-e-funcionalidades)
+  - [Demonstração de Uso](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#demonstraçao-de-uso)
   - [Destino dos Arquivos](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#destino-dos-arquivos)
   - [Como instalar](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#como-instalar)
   - [Desinstalação](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#desinstalaçao)
@@ -24,6 +25,17 @@ Uma ferramenta CLI simples e intuitiva para instalar e gerenciar pacotes RPM loc
 - **Remover RPM Local e Layered:** Listagem por ordem numérica dos pacotes instalados pelo usuário.
 - **Rollback:** Reversão para o estado anterior do sistema.
 - **Status:** Verifica pacotes layereds e pendentes.
+
+## Demonstração de Uso
+
+### Menu Principal
+![Main menu](screenshots/screenshot-menu.png)
+
+### Instalar RPM Local (Downloads)
+![Install RPM](screenshots/screenshot-install.png)
+
+### Desinstalar Layered / Local RPM
+![Remove RPM](screenshots/screenshot-remove.png)
 
 ## Destino dos Arquivos
 
