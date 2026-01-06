@@ -2,17 +2,16 @@
   <img src="slogan-rom.png" alt="RPM-OSTree Manager Slogan" width="100%">
 </p>
 
-# RPM-OSTree Manager
-
 [![Fedora Atomic](https://img.shields.io/badge/Fedora-Atomic-blue?logo=fedora&logoColor=white)](https://fedoraproject.org/)
 [![Bazzite](https://img.shields.io/badge/Compatible-Bazzite-8a2be2)](https://github.com/ublue-os/bazzite)
 [![Bluefin](https://img.shields.io/badge/Compatible-Bluefin-00a8e8?)](https://projectbluefin.io/)
 [![Aurora](https://img.shields.io/badge/Compatible-Aurora-db6383?)](https://github.com/ublue-os/aurora)
 
 # Tabela de Conteúdo
-* [🇺🇸](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md)
+[🇺🇸 English](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷 Português](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md)
 * [Tabela de Conteúdo](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#tabela-de-conteudo)
   - [Sobre e Funcionalidades](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#sobre-e-funcionalidades)
+  - [Destino dos Arquivos](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#destino-dos-arquivos)
   - [Como instalar](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#como-instalar)
   - [Desinstalação](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#desinstalaçao)
   - [Créditos e Licença](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#creditos-e-licença)
@@ -25,6 +24,19 @@ Uma ferramenta CLI simples e intuitiva para instalar e gerenciar pacotes RPM loc
 - **Remover RPM Local e Layered:** Listagem por ordem numérica dos pacotes instalados pelo usuário.
 - **Rollback:** Reversão para o estado anterior do sistema.
 - **Status:** Verifica pacotes layereds e pendentes.
+
+## Destino dos Arquivos
+
+Este mapa mostra onde cada arquivo é colocado no seu sistema após a execução do instalador:
+
+```text
+Caminho de destino
+
+├── /usr/local/bin/rom                                  # Principal executável (from rom.sh)
+├── ~/.local/share/icons/rpm-ostree-manager.svg         # Ícone (from icon.svg)
+└── ~/.local/share/applications/rpm-ostree-manager.desktop # Atalho no menu de aplicativos
+
+```
 
 ## Como instalar
 
