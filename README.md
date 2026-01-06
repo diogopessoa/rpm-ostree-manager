@@ -2,28 +2,41 @@
   <img src="slogan-rom.png" alt="RPM-OSTree Manager Slogan" width="100%">
 </p>
 
-# RPM-OSTree Manager
-
 [![Fedora Atomic](https://img.shields.io/badge/Fedora-Atomic-blue?logo=fedora&logoColor=white)](https://fedoraproject.org/)
 [![Bazzite](https://img.shields.io/badge/Compatible-Bazzite-8a2be2)](https://github.com/ublue-os/bazzite)
 [![Bluefin](https://img.shields.io/badge/Compatible-Bluefin-00a8e8?)](https://projectbluefin.io/)
 [![Aurora](https://img.shields.io/badge/Compatible-Aurora-db6383?)](https://github.com/ublue-os/aurora)
 
 # Table of Contents
-* [🇺🇸](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md) 
+[🇺🇸 English](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷 Português](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md) 
 * [Table of Contents](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#table-of-contents)
   - [About and Features](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#about-features)
+  - [File Destination](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#file-destination)
   - [Installation](https://github.com/diogopessoa/rpm-ostree-manager#/?tab=readme-ov-file#installation)
   - [Uninstallation](https://github.com/diogopessoa/rpm-ostree-manager#/?tab=readme-ov-file#uninstallation)
   - [Credits and License](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#credits-and-license)
 
-A simple and intuitive CLI tool to install and manage local and layered RPM packages on Fedora Atomic systems (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
 
 ## About and Features
+
+RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage local and layered RPM packages on Fedora Atomic systems (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
 - **Install Local RPM:** Automatically scans for RPM files in the Downloads folder.
 - **Remove Local and Layered RPMs:** Lists user-installed packages numerically for easy selection.
 - **Rollback:** Quickly revert the system to its previous state.
 - **Status:** Check for layered packages and pending deployments.
+
+## File Destination
+
+This map shows where each file is placed on your system after running the installer:
+
+```text
+Destination Path
+
+├── /usr/local/bin/rom                                  # Main executable (from rom.sh)
+├── ~/.local/share/icons/rpm-ostree-manager.svg         # Icon file (from icon.svg)
+└── ~/.local/share/applications/rpm-ostree-manager.desktop # Application Menu shortcut
+
+```
 
 ## Installation
 
