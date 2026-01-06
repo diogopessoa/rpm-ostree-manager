@@ -11,6 +11,7 @@
 [🇺🇸 English](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷 Português](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md) 
 * [Table of Contents](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#table-of-contents)
   - [About and Features](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#about-features)
+  - [Screenshots](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#screenshots)
   - [File Destination](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#file-destination)
   - [Installation](https://github.com/diogopessoa/rpm-ostree-manager#/?tab=readme-ov-file#installation)
   - [Uninstallation](https://github.com/diogopessoa/rpm-ostree-manager#/?tab=readme-ov-file#uninstallation)
