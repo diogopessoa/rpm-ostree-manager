@@ -13,29 +13,34 @@
   - [About and Features](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#about-features)
   - [Screenshots](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#screenshots)
   - [File Destination](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#file-destination)
-  - [Installation](https://github.com/diogopessoa/rpm-ostree-manager#/?tab=readme-ov-file#installation)
-  - [Uninstallation](https://github.com/diogopessoa/rpm-ostree-manager#/?tab=readme-ov-file#uninstallation)
+  - [Installation](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#installation)
+  - [Uninstallation](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#uninstallation)
   - [Credits and License](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#credits-and-license)
 
 
 ## About and Features
 
 RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage local and layered RPM packages on Fedora Atomic systems (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
-- **Install Local RPM:** Automatically scans for RPM files in the Downloads folder.
+
+- **Install Local RPM:** Automatically scans for RPM files in the Downloads folder or accepts manual paths.
 - **Remove Local and Layered RPMs:** Lists user-installed packages numerically for easy selection.
 - **Rollback:** Quickly revert the system to its previous state.
 - **Status:** Check for layered packages and pending deployments.
 
-## Screenshots
+### UX
 
+- **Intuitive CLI Navigation:** Easy-to-use numbered menus.
+- **Smart Drag & Drop Support:** Install RPMs from any folder by simply dragging the file into the terminal.
+  
 ### Main Menu
-![Main menu](screenshots/screenshot-menu.png)
+![main_menu](screenshots/main_menu.png)
 
-### Install Local RPM (Downloads)
-![Install RPM](screenshots/screenshot-install.png)
+## Demo
 
-### Remove Layered / Local RPM
-![Remove RPM](screenshots/screenshot-remove.png)
+Brief demonstration of use:
+
+![Video](screenshots/demo.mp4)
+
 
 ## File Destination
 
