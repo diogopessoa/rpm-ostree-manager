@@ -22,20 +22,25 @@
 Uma ferramenta CLI simples e intuitiva para instalar e gerenciar pacotes RPM locais e layered em sistemas Fedora Atomic (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
 
 - **Instalar RPM Local:** Busca automática de RPM na pasta Downloads.
-- **Remover RPM Local e Layered:** Listagem por ordem numérica dos pacotes instalados pelo usuário.
-- **Rollback:** Reversão para o estado anterior do sistema.
+- **Remover RPM Local e Layered:** Listagem por ordem numérica dos pacotes instalados para fácil seleção.
+- **Rollback:** Reversão rápida para o estado anterior do sistema.
 - **Status:** Verifica pacotes layereds e pendentes.
+
+### UX
+
+- **Navegação intuitiva na linha de comando:** Menus numerados fáceis de usar.
+- **Suporte inteligente para arrastar e soltar:** Instale RPMs de qualquer pasta simplesmente arrastando o arquivo para o terminal.
+  
+### Menu Principal
+![main_menu](screenshots/main_menu.png)
 
 ## Demonstração de Uso
 
-### Menu Principal
-![Main menu](screenshots/screenshot-menu.png)
+<video src="https://github.com/user-attachments/assets/70e30d2d-cc4a-4772-8974-a99d58d4aaa8" width="100%" controls title="RPM-OSTree Manager Demo">
+  Your browser does not support the video tag.
+</video>
 
-### Instalar RPM Local (Downloads)
-![Install RPM](screenshots/screenshot-install.png)
-
-### Desinstalar Layered / Local RPM
-![Remove RPM](screenshots/screenshot-remove.png)
+Esta demonstração é apenas uma parte das funcionalidades disponíveis.
 
 ## Destino dos Arquivos
 
