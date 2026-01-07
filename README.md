@@ -37,16 +37,19 @@ RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage loca
 
 ## Demo
 
-Brief demonstration of use:
+<video src="https://github.com/user-attachments/assets/70e30d2d-cc4a-4772-8974-a99d58d4aaa8" width="100%" controls title="RPM-OSTree Manager Demo">
+  Your browser does not support the video tag.
+</video>
 
-![Video](screenshots/demo.mp4)
-
+This demonstration shows only a portion of the features in action.
 
 ## File Destination
 
 This map shows where each file is placed on your system after running the installer:
 
-```text
+
+
+```
 Destination Path
 
 ├── /usr/local/bin/rom                                  # Main executable (from rom.sh)
