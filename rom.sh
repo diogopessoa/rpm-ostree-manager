@@ -23,6 +23,7 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m'
+BOLD='\033[1m'
 
 show_menu() {
     clear
@@ -48,28 +49,42 @@ install_rpm() {
     
     if [ ${#files[@]} -eq 0 ]; then
         echo -e "${RED}No .rpm files found in $DOWNLOADS_DIR${NC}"
+        echo "Tip: You can also drag and drop an RPM file here from any folder."
     else
-        echo "Select the file to install:"
+        echo "Select a number OR drag and drop an RPM file here:"
         for i in "${!files[@]}"; do
             echo -e "$((i+1))) ${GREEN}${files[$i]}${NC}"
         done
         echo "0) Cancel"
-        
-        read -rp "Enter number: " num
-        if [[ "$num" -gt 0 && "$num" -le ${#files[@]} ]]; then
-            selected_file="${files[$((num-1))]}"
-            sudo rpm-ostree install "$selected_file"
-            echo -e "${GREEN}Scheduled! Reboot to apply changes.${NC}"
-        fi
     fi
-    read -p "Press Enter..."
+    
+    echo -ne "\nEnter number or drop file: "
+    read -rp "" input
+    input=$(echo "$input" | tr -d "'\"")
+
+    if [[ -z "$input" ]]; then
+        : # Do nothing, will trigger the Return prompt
+    elif [[ "$input" == "0" ]]; then
+        return
+    elif [[ "$input" =~ ^[0-9]+$ ]] && [[ "$input" -le ${#files[@]} ]]; then
+        selected_file="${files[$((input-1))]}"
+        sudo rpm-ostree install "$selected_file"
+        echo -e "${GREEN}Scheduled! Reboot to apply changes.${NC}"
+    elif [[ -f "$input" && "$input" == *.rpm ]]; then
+        sudo rpm-ostree install "$input"
+        echo -e "${GREEN}Scheduled! Reboot to apply changes.${NC}"
+    else
+        echo -e "${RED}Invalid selection or file!${NC}"
+    fi
+    
+    read -p "Press Enter to Return..."
 }
 
 remove_rpm() {
     echo -e "\n--- ${RED}Remove Layered / Local RPM${NC} ---"
     echo "Searching for packages..."
 
-    # Robust query: searches all possible keys where uBlue/Bazzite/Silverblue store packages
+    # Searches all possible keys store packages
     packages=$(rpm-ostree status --json | jq -r '.deployments[] | select(.booted == true) | 
         (.packages // []) + 
         (."local-packages" // []) + 
@@ -80,7 +95,6 @@ remove_rpm() {
         echo -e "${RED}No layered packages found.${NC}"
     else
         mapfile -t pkg_list < <(echo "$packages")
-        
         echo "Select the package to remove:"
         for i in "${!pkg_list[@]}"; do
             echo -e "$((i+1))) ${RED}${pkg_list[$i]}${NC}"
@@ -88,22 +102,30 @@ remove_rpm() {
         echo "0) Cancel"
 
         read -rp "Enter number: " num
-        if [[ "$num" -gt 0 && "$num" -le ${#pkg_list[@]} ]]; then
+        if [[ -z "$num" ]]; then
+            :
+        elif [[ "$num" -gt 0 && "$num" -le ${#pkg_list[@]} ]]; then
             selected_pkg="${pkg_list[$((num-1))]}"
             # Clean package name (remove version if present)
             pkg_clean=$(echo "$selected_pkg" | sed 's/-[0-9].*//')
             sudo rpm-ostree uninstall "$pkg_clean"
             echo -e "${GREEN}Removal scheduled! Please reboot the system.${NC}"
+        elif [[ "$num" == "0" ]]; then
+            return
+        else
+            echo -e "${RED}Invalid selection!${NC}"
         fi
     fi
-    read -p "Press Enter..."
+    read -p "Press Enter to Return..."
 }
 
 rollback() {
     echo -e "\n--- ${GREEN}System Rollback${NC} ---"
     read -p "Do you want to revert to the previous state? (y/N): " confirm
-    [[ "$confirm" =~ ^[Yy]$ ]] && sudo rpm-ostree rollback
-    read -p "Press Enter..."
+    if [[ "$confirm" =~ ^[Yy]$ ]]; then
+        sudo rpm-ostree rollback
+    fi
+    read -p "Press Enter to Return..."
 }
 
 # --- Main Loop ---
@@ -114,7 +136,7 @@ while true; do
         1) install_rpm ;;
         2) remove_rpm ;;
         3) rollback ;;
-        4) clear; rpm-ostree status; echo ""; read -p "Press Enter..." ;;
+        4) clear; rpm-ostree status; echo ""; read -p "Press Enter to Return..." ;;
         0)
             clear
             echo
@@ -125,7 +147,7 @@ while true; do
             ;;
         *)
             echo -e "${RED}Invalid option!${NC}"
-            sleep 1
+            read -p "Press Enter to Return..."
             ;;
     esac
 done
