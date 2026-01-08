@@ -3,6 +3,7 @@
 # ==============================================================================
 # PROJECT: RPM-OSTree Manager
 # AUTHOR: Diogo Pessoa (https://github.com/diogopessoa/rpm-ostree-manager/)
+# VERSION: 0.1.2
 # ==============================================================================
 
 # --- Terminal Check (Force open in Ptyxis if launched from Menu) ---
@@ -25,6 +26,26 @@ RED='\033[0;31m'
 NC='\033[0m'
 BOLD='\033[1m'
 
+# --- Helper Function: Get Input with ESC Support ---
+get_input() {
+    local prompt=$1
+    echo -ne "$prompt"
+    
+    # Reads only 1 character silently
+    read -rsn1 key
+    
+    # Se for ESC (\e ou \033)
+    if [[ "$key" == $'\e' ]]; then
+        echo "" 
+        return 1
+    fi
+
+    # If it's not ESC, it reads the rest of what was typed
+    read -r rest
+    echo "$key$rest"
+    return 0
+}
+
 show_menu() {
     clear
     echo -e "${BLUE}╭────────────────────────────────────╮${NC}"
@@ -36,20 +57,20 @@ show_menu() {
     echo -e "2) ${RED}Remove${NC} Layered/Local RPM"
     echo -e "3) ${GREEN}Rollback:${NC} revert the system"
     echo -e "4) Check Status"
-    echo -e "0) Exit"
-    echo -ne "\nOption: "
+    echo -e "0) Exit (or press ESC)"
+    echo -e "\n${NC}──────────────────────────────────────"
+    echo -ne "  ${BLUE}ESC${NC} = Return/Exit    ${BLUE}ENTER${NC} = Confirm\n\nOption: "
 }
 
 install_rpm() {
     echo -e "\n--- ${BLUE}Install Local RPM${NC} ---"
     cd "$DOWNLOADS_DIR" || return
     
-    # List .rpm files and store in an array
     mapfile -t files < <(ls *.rpm 2>/dev/null)
     
     if [ ${#files[@]} -eq 0 ]; then
         echo -e "${RED}No .rpm files found in $DOWNLOADS_DIR${NC}"
-        echo "Tip: You can also drag and drop an RPM file here from any folder."
+        echo "Tip: You can also drag and drop an RPM file here."
     else
         echo "Select a number OR drag and drop an RPM file here:"
         for i in "${!files[@]}"; do
@@ -58,14 +79,13 @@ install_rpm() {
         echo "0) Cancel"
     fi
     
-    echo -ne "\nEnter number or drop file: "
-    read -rp "" input
+    input=$(get_input "\nEnter number or drop file (ESC to return): ")
+    if [[ $? -eq 1 || "$input" == "0" ]]; then return; fi
+
     input=$(echo "$input" | tr -d "'\"")
 
     if [[ -z "$input" ]]; then
-        : # Do nothing, will trigger the Return prompt
-    elif [[ "$input" == "0" ]]; then
-        return
+        :
     elif [[ "$input" =~ ^[0-9]+$ ]] && [[ "$input" -le ${#files[@]} ]]; then
         selected_file="${files[$((input-1))]}"
         sudo rpm-ostree install "$selected_file"
@@ -77,14 +97,14 @@ install_rpm() {
         echo -e "${RED}Invalid selection or file!${NC}"
     fi
     
-    read -p "Press Enter to Return..."
+    echo -e "\n${BLUE}Press ESC to Return...${NC}"
+    read -rsn1 -p ""
 }
 
 remove_rpm() {
     echo -e "\n--- ${RED}Remove Layered / Local RPM${NC} ---"
     echo "Searching for packages..."
 
-    # Searches all possible keys store packages
     packages=$(rpm-ostree status --json | jq -r '.deployments[] | select(.booted == true) | 
         (.packages // []) + 
         (."local-packages" // []) + 
@@ -101,53 +121,64 @@ remove_rpm() {
         done
         echo "0) Cancel"
 
-        read -rp "Enter number: " num
+        num=$(get_input "\nEnter number (ESC to return): ")
+        if [[ $? -eq 1 || "$num" == "0" ]]; then return; fi
+
         if [[ -z "$num" ]]; then
             :
-        elif [[ "$num" -gt 0 && "$num" -le ${#pkg_list[@]} ]]; then
+        elif [[ "$num" =~ ^[0-9]+$ ]] && [[ "$num" -le ${#pkg_list[@]} ]]; then
             selected_pkg="${pkg_list[$((num-1))]}"
-            # Clean package name (remove version if present)
             pkg_clean=$(echo "$selected_pkg" | sed 's/-[0-9].*//')
             sudo rpm-ostree uninstall "$pkg_clean"
-            echo -e "${GREEN}Removal scheduled! Please reboot the system.${NC}"
-        elif [[ "$num" == "0" ]]; then
-            return
+            echo -e "${GREEN}Removal scheduled! Please reboot.${NC}"
         else
             echo -e "${RED}Invalid selection!${NC}"
         fi
     fi
-    read -p "Press Enter to Return..."
+    echo -e "\n${BLUE}Press ESC to Return...${NC}"
+    read -rsn1 -p ""
 }
 
 rollback() {
     echo -e "\n--- ${GREEN}System Rollback${NC} ---"
-    read -p "Do you want to revert to the previous state? (y/N): " confirm
+    echo -ne "Do you want to revert to the previous state? (y/N): "
+    read -r confirm
     if [[ "$confirm" =~ ^[Yy]$ ]]; then
         sudo rpm-ostree rollback
     fi
-    read -p "Press Enter to Return..."
+    echo -e "\n${BLUE}Press ESC to Return...${NC}"
+    read -rsn1 -p ""
 }
 
 # --- Main Loop ---
 while true; do
     show_menu
-    read -r opt
+    
+    # Capture the main menu option
+    read -rsn1 opt
     case "$opt" in
         1) install_rpm ;;
         2) remove_rpm ;;
         3) rollback ;;
-        4) clear; rpm-ostree status; echo ""; read -p "Press Enter to Return..." ;;
-        0)
+        4) 
             clear
-            echo
-            echo -e "   Follow for updates:"
+            rpm-ostree status
+            echo -e "\n${BLUE}Press ESC to Return...${NC}"
+            read -rsn1
+            ;;
+        0|$'\e') # Exit with 0 or ESC
+            clear
+            echo -e "\n   Thank you for using ROM Manager!"
+            echo -e "   Star this project at:"
             echo -e "   github.com/diogopessoa/rpm-ostree-manager"
             echo -e "${BLUE}---------------------------------------------${NC}"
             exit 0 
             ;;
         *)
-            echo -e "${RED}Invalid option!${NC}"
-            read -p "Press Enter to Return..."
+            if [[ -n "$opt" && "$opt" != $'\e' ]]; then
+                echo -e "${RED}Invalid option!${NC}"
+                sleep 1
+            fi
             ;;
     esac
 done
