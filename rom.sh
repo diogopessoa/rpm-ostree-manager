@@ -3,7 +3,7 @@
 # ==============================================================================
 # PROJECT: RPM-OSTree Manager
 # AUTHOR: Diogo Pessoa (https://github.com/diogopessoa/rpm-ostree-manager/)
-# VERSION: 0.1.3
+# VERSION: 0.1.5
 # ==============================================================================
 
 # --- Terminal Check (Force open in Ptyxis if launched from Menu) ---
@@ -23,6 +23,7 @@ DOWNLOADS_DIR="$USER_HOME/Downloads"
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RED='\033[0;31m'
+PURPLE='\033[0;35m'
 NC='\033[0m'
 BOLD='\033[1m'
 
@@ -36,7 +37,8 @@ show_menu() {
     echo -e "1) ${BLUE}Install${NC} Local RPM (Downloads)"
     echo -e "2) ${RED}Remove${NC} Layered/Local RPM"
     echo -e "3) ${GREEN}Rollback:${NC} revert the system"
-    echo -e "4) Check Status"
+    echo -e "4) ${PURPLE}Pin/Unpin${NC} Deployment"
+    echo -e "5) Check Status"
     echo -e "0) Exit"
     echo -ne "\nOption: "
 }
@@ -84,7 +86,7 @@ install_rpm() {
 remove_rpm() {
     echo -e "\n--- ${RED}Remove Layered / Local RPM${NC} ---"
     echo "Searching for packages..."
-
+    
     # Searches all possible keys store packages
     packages=$(rpm-ostree status --json | jq -r '.deployments[] | select(.booted == true) | 
         (.packages // []) + 
@@ -129,6 +131,41 @@ rollback() {
     read -p "Press Enter to Return..."
 }
 
+pin_manager() {
+    echo -e "\n--- ${PURPLE}Pin/Unpin Deployment${NC} ---"
+    rpm-ostree status
+    echo -e "\nOptions:"
+    echo "1) Pin a stable deployment"
+    echo "2) Unpin a deployment"
+    echo "0) Cancel"
+    echo -ne "\nOption: "
+    read -r pin_opt
+
+    case "$pin_opt" in
+        1)
+            echo -ne "Enter the index to PIN (usually 0 for current) or press Ctrl+c to cancel: "
+            read -r idx
+            if [[ "$idx" =~ ^[0-9]+$ ]]; then
+                sudo ostree admin pin "$idx"
+            fi
+            ;;
+        2)
+            echo -ne "Enter the index to UNPIN (usually 2 for current) or press Ctrl+c to cancel: "
+            read -r idx
+            if [[ "$idx" =~ ^[0-9]+$ ]]; then
+                sudo ostree admin pin --unpin "$idx"
+                echo -e "${GREEN}Deployment $idx unpinned successfully!${NC}"
+                echo -e "${GREEN} - Restart the system to use the unpinned deployment.${NC}"
+                echo -e "${BLUE}------------------------------------------------------------------------------------------------------------------------${NC}"
+                echo -e "If you have automatic updates enabled, it's recommended to temporarily disable them until new updates with fixes arrive."
+            fi
+            ;;
+        0) return ;;
+        *) echo -e "${RED}Invalid option!${NC}" ;;
+    esac
+    read -p "Press Enter to Return..."
+}
+
 # --- Main Loop ---
 while true; do
     show_menu
@@ -137,12 +174,13 @@ while true; do
         1) install_rpm ;;
         2) remove_rpm ;;
         3) rollback ;;
-        4) clear; rpm-ostree status; echo ""; read -p "Press Enter to Return..." ;;
+        4) pin_manager ;;
+        5) clear; rpm-ostree status; echo ""; read -p "Press Enter to Return..." ;;
         0)
             clear
             echo
-            echo -e "   Follow for updates:"
-            echo -e "   github.com/diogopessoa/rpm-ostree-manager"
+            echo -e "    Follow for updates:"
+            echo -e "    github.com/diogopessoa/rpm-ostree-manager"
             echo -e "${BLUE}---------------------------------------------${NC}"
             exit 0 
             ;;
