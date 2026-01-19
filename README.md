@@ -25,6 +25,7 @@ RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage loca
 - **Install Local RPM:** Automatically scans for RPM files in the Downloads folder or accepts manual paths.
 - **Remove Local and Layered RPMs:** Lists user-installed packages numerically for easy selection.
 - **Rollback:** Quickly revert the system to its previous state.
+- **Pin/Unpin Deployment:** Manually protect a stable deployment or remove it.
 - **Status:** Check for layered packages and pending deployments.
 
 ### UX
@@ -33,7 +34,7 @@ RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage loca
 - **Smart Drag & Drop Support:** Install RPMs from any folder by simply dragging the file into the terminal.
   
 ### Main Menu
-![main_menu](screenshots/main_menu.png)
+![main_menu](screenshots/main_menu_v2.png)
 
 ## Demo
 
