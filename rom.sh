@@ -3,7 +3,7 @@
 # ==============================================================================
 # PROJECT: RPM-OSTree Manager
 # AUTHOR: Diogo Pessoa (https://github.com/diogopessoa/rpm-ostree-manager/)
-# VERSION: 0.1.4
+# VERSION: 0.1.5
 # ==============================================================================
 
 # --- Terminal Check (Force open in Ptyxis if launched from Menu) ---
@@ -79,7 +79,6 @@ install_rpm() {
     else
         echo -e "${RED}Invalid selection or file!${NC}"
     fi
-    
     read -p "Press Enter to Return..."
 }
 
@@ -128,41 +127,75 @@ rollback() {
     if [[ "$confirm" =~ ^[Yy]$ ]]; then
         sudo rpm-ostree rollback
     fi
+    echo -e "${GREEN}Rollback successfull!${NC}"
+    echo -e "${BLUE}-----------------------------------------------------------------------------------------------------------${NC}"
+    echo -e "If the Rollback occurred after updates broke the system, disable them temporarily until fixes are released."
     read -p "Press Enter to Return..."
 }
 
 pin_manager() {
-    echo -e "\n--- ${PURPLE}Pin/Unpin Deployment${NC} ---"
-    rpm-ostree status
-    echo -e "\nOptions:"
-    echo "1) Pin a stable deployment"
-    echo "2) Unpin a deployment"
-    echo "0) Cancel"
-    echo -ne "\nOption: "
-    read -r pin_opt
+    echo -e "\n--- ${PURPLE}Pin/Unpin Deployment Manager${NC} ---"
+    echo "Fetching deployments..."
 
-    case "$pin_opt" in
-        1)
-            echo -ne "Enter the index to PIN (usually 0 for current) or press Ctrl+c to cancel: "
-            read -r idx
-            if [[ "$idx" =~ ^[0-9]+$ ]]; then
-                sudo ostree admin pin "$idx"
+    # Extracts version and state from 'pinned'
+    mapfile -t deploy_data < <(rpm-ostree status --json | jq -r '.deployments[] | "\(.version)|\(.pinned)"')
+
+    if [ ${#deploy_data[@]} -eq 0 ]; then
+        echo -e "${RED}No deployments found.${NC}"
+    else
+        echo -e "\nSelect a deployment to manage:"
+        for i in "${!deploy_data[@]}"; do
+            version=$(echo "${deploy_data[$i]}" | cut -d'|' -f1)
+            is_pinned=$(echo "${deploy_data[$i]}" | cut -d'|' -f2)
+
+            if [ "$is_pinned" == "true" ]; then
+                echo -e "$((i+1))) ${GREEN}${version} (PINNED)${NC}"
+            else
+                echo -e "$((i+1))) ${BLUE}${version}${NC}"
             fi
-            ;;
-        2)
-            echo -ne "Enter the index to UNPIN (usually 2 for current) or press Ctrl+c to cancel: "
-            read -r idx
-            if [[ "$idx" =~ ^[0-9]+$ ]]; then
-                sudo ostree admin pin --unpin "$idx"
-                echo -e "${GREEN}Deployment $idx unpinned successfully!${NC}"
-                echo -e "${GREEN} - Restart the system to use the unpinned deployment.${NC}"
-                echo -e "${BLUE}------------------------------------------------------------------------------------------------------------------------${NC}"
-                echo -e "If you have automatic updates enabled, it's recommended to temporarily disable them until new updates with fixes arrive."
+        done
+        echo "0) Cancel"
+
+        echo -ne "\nEnter number: "
+        read -r num
+
+        # List deployments
+        if [[ "$num" -gt 0 && "$num" -le ${#deploy_data[@]} ]]; then
+            idx=$((num-1))
+            selected_version=$(echo "${deploy_data[$idx]}" | cut -d'|' -f1)
+            selected_pinned=$(echo "${deploy_data[$idx]}" | cut -d'|' -f2)
+            
+            echo -e "\nSelected: ${BOLD}$selected_version${NC}"
+            
+            if [ "$selected_pinned" == "true" ]; then
+                echo -e "Status: ${GREEN}PINNED${NC}"
+                echo -e "1) ${RED}Unpin${NC} (Remove deployment pinned)"
+            else
+                echo -e "Status: ${BLUE}NOT PINNED${NC}"
+                echo -e "1) ${GREEN}Pin${NC} (Pin this version)"
             fi
-            ;;
-        0) return ;;
-        *) echo -e "${RED}Invalid option!${NC}" ;;
-    esac
+            echo "0) Cancel"
+            echo -ne "\nOption: "
+            read -r action
+
+            if [[ "$action" == "1" ]]; then
+                if [ "$selected_pinned" == "true" ]; then
+                    # Use the index (idx)
+                    if sudo ostree admin pin --unpin "$idx"; then
+                        echo -e "${GREEN}Version unpinned successfully!${NC}"
+                    else
+                        echo -e "${RED}Failed to unpin deployment.${NC}"
+                    fi
+                else
+                    if sudo ostree admin pin "$idx"; then
+                        echo -e "${GREEN}Version pinned successfully!${NC}"
+                    else
+                        echo -e "${RED}Failed to pin deployment.${NC}"
+                    fi
+                fi
+            fi
+        fi
+    fi
     read -p "Press Enter to Return..."
 }
 
