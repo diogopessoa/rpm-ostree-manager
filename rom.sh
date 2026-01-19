@@ -3,7 +3,7 @@
 # ==============================================================================
 # PROJECT: RPM-OSTree Manager
 # AUTHOR: Diogo Pessoa (https://github.com/diogopessoa/rpm-ostree-manager/)
-# VERSION: 0.1.5
+# VERSION: 0.1.4
 # ==============================================================================
 
 # --- Terminal Check (Force open in Ptyxis if launched from Menu) ---
