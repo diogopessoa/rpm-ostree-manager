@@ -45,4 +45,4 @@ update-desktop-database ~/.local/share/applications/ 2>/dev/null
 echo -e "${GREEN}Installation completed successfully!${NC}"
 echo "You can now find 'RPM-OSTree Manager' in your application menu or type 'rom' in the terminal."
 echo 
-echo "PT_BR: Você já pode encontrar o 'RPM-OSTree Manager' menu de aplicativos ou digitar 'rom' no terminal."
+echo "PT_BR: Você já pode encontrar o 'RPM-OSTree Manager' no menu de aplicativos ou digitar 'rom' no terminal."
