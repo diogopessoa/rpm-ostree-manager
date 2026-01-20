@@ -11,6 +11,7 @@
 [🇺🇸 English](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷 Português](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md)
 * [Tabela de Conteúdo](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#tabela-de-conteudo)
   - [Sobre e Funcionalidades](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#sobre-e-funcionalidades)
+  - [Menu Principal](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#menu-principal)
   - [Demonstração de Uso](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#demonstraçao-de-uso)
   - [Destino dos Arquivos](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#destino-dos-arquivos)
   - [Como instalar](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#como-instalar)
@@ -27,12 +28,14 @@ Uma ferramenta CLI simples e intuitiva para instalar e gerenciar pacotes RPM loc
 - **Fixar/Desafixar Implantação:** Fixe uma implantação estável. Ela permanecerá na entrada do GRUB até que você a remova.
 - **Status:** Verifica pacotes layereds e pendentes.
 
+💡 Informação: Uma implantação é a imagem completa do sistema (base + pacotes layerados) listada em `rpm-ostree status`, identificada por índice (ex: 0). Fixá-la previne remoção automática.
+
 ### UX
 
 - **Navegação intuitiva na linha de comando:** Menus numerados fáceis de usar.
 - **Suporte inteligente para arrastar e soltar:** Instale RPMs de qualquer pasta simplesmente arrastando o arquivo para o terminal.
   
-### Menu Principal
+## Menu Principal
 ![main_menu](screenshots/main_menu_v2.png)
 
 ## Demonstração de Uso
