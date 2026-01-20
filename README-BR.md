@@ -24,7 +24,7 @@ Uma ferramenta CLI simples e intuitiva para instalar e gerenciar pacotes RPM loc
 - **Instalar RPM Local:** Busca automática de RPM na pasta Downloads.
 - **Remover RPM Local e Layered:** Listagem por ordem numérica dos pacotes instalados para fácil seleção.
 - **Rollback:** Reversão rápida para o estado anterior do sistema.
-- **Fixar/Desafixar Implantação:** Proteja manualmente uma implantação estável ou remova-a.
+- **Fixar/Desafixar Implantação:** Fixe uma implantação estável. Ela permanecerá na entrada do GRUB até que você a remova.
 - **Status:** Verifica pacotes layereds e pendentes.
 
 ### UX
