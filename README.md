@@ -11,7 +11,8 @@
 [🇺🇸 English](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷 Português](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md) 
 * [Table of Contents](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#table-of-contents)
   - [About and Features](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#about-features)
-  - [Screenshots](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#screenshots)
+  - [Main Menu](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#main-menu)
+  - [Demo](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#demo)
   - [File Destination](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#file-destination)
   - [Installation](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#installation)
   - [Uninstallation](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#uninstallation)
@@ -28,12 +29,15 @@ RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage loca
 - **Pin/Unpin Deployment:** Pin a stable deployment. It will remain in the GRUB entry until you remove it.
 - **Status:** Check for layered packages and pending deployments.
 
+💡 Information:
+A deployment is the complete system image (base + layered packages) listed in rpm-ostree status, identified by an index (example: 0). Pinning it prevents automatic removal.
+
 ### UX
 
 - **Intuitive CLI Navigation:** Easy-to-use numbered menus.
 - **Smart Drag & Drop Support:** Install RPMs from any folder by simply dragging the file into the terminal.
   
-### Main Menu
+## Main Menu
 ![main_menu](screenshots/main_menu_v2.png)
 
 ## Demo
