@@ -124,12 +124,21 @@ remove_rpm() {
 rollback() {
     echo -e "\n--- ${GREEN}System Rollback${NC} ---"
     read -p "Do you want to revert to the previous state? (y/N): " confirm
+    
     if [[ "$confirm" =~ ^[Yy]$ ]]; then
-        sudo rpm-ostree rollback
+        # O 'if' aqui verifica se o comando sudo funcionou
+        if sudo rpm-ostree rollback; then
+            echo -e "\n${GREEN}Rollback successful!${NC}"
+            echo -e "${BLUE}-----------------------------------------------------------------------------------------------------------${NC}"
+            echo -e "If the Rollback occurred after updates broke the system, disable them temporarily until fixes are released."
+        else
+            echo -e "\n${RED}Rollback failed or was cancelled by the system.${NC}"
+        fi
+    else
+        echo -e "\n${RED}Rollback cancelled by user.${NC}"
     fi
-    echo -e "${GREEN}Rollback successfull!${NC}"
-    echo -e "${BLUE}-----------------------------------------------------------------------------------------------------------${NC}"
-    echo -e "If the Rollback occurred after updates broke the system, disable them temporarily until fixes are released."
+    
+    echo ""
     read -p "Press Enter to Return..."
 }
 
