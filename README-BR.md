@@ -20,20 +20,19 @@
 
 ## Sobre e Funcionalidades
 
-Uma ferramenta CLI simples e intuitiva para instalar e gerenciar pacotes RPM locais e layered em sistemas Fedora Atomic (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
+RPM-OSTree Manager é uma ferramenta CLI simples e intuitiva para instalar e gerenciar pacotes RPM locais e layered em sistemas Fedora Atomic (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
 
-- **Instalar RPM Local:** Busca automática de RPM na pasta Downloads.
-- **Remover RPM Local e Layered:** Listagem por ordem numérica dos pacotes instalados para fácil seleção.
-- **Rollback:** Reversão rápida para o estado anterior do sistema.
-- **Fixar/Desafixar Implantação:** Fixe uma implantação estável. Ela permanecerá na entrada do GRUB até que você a remova.
-- **Status:** Verifica pacotes layereds e pendentes.
+- **📦 Instalar RPM Local:** Busca automaticamente arquivos RPM na pasta **Downloads**, ou você pode **arrastar** um RPM diretamente para a janela do programa para instalá-lo de qualquer local.
+- **🗑️ Remover RPMs Locais e em Camadas:** Lista os pacotes instalados pelo usuário numericamente para facilitar a desinstalação.
 
-💡 Informação: Uma implantação é a imagem completa do sistema (base + pacotes layerados) listada em `rpm-ostree status`, identificada por índice (ex: 0). Fixá-la previne remoção automática.
+- **↩️ Reverter:** Reverte rapidamente o sistema para um estado previamente selecionado.
 
-### UX
+- **📌 Fixar/Desafixar Implantação:** Fixe uma implantação estável para evitar que seja removida durante as atualizações. Ela permanecerá na entrada do GRUB até que você a desafixe.
 
-- **Navegação intuitiva na linha de comando:** Menus numerados fáceis de usar.
-- **Suporte inteligente para arrastar e soltar:** Instale RPMs de qualquer pasta simplesmente arrastando o arquivo para o terminal.
+- **☑️ Status:** Verifica pacotes em camadas, implantações pendentes e versionamento ativo do sistema.
+
+💡 Informações:
+Uma implantação é a imagem completa do sistema (base + pacotes em camadas) listada no status do rpm-ostree, identificada por um índice (exemplo: 0). Fixá-la impede a remoção automática.
   
 ## Menu Principal
 ![main_menu](screenshots/main_menu_v2.png)
