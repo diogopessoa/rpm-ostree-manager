@@ -23,9 +23,9 @@
 
 RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage local and layered RPM packages on Fedora Atomic systems (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
 
-- ** 📦 Install Local RPM:** Automatically scans for RPM files in the **Downloads** folder, or you can **drag** an RPM directly into the program window to install it from any location.
-- ** 🗑️ Remove Local and Layered RPMs:** Lists user-installed packages numerically for easy uninstall.
-- **Rollback:** Quickly revert the system to a previously selected state. 
+- **📦 Install Local RPM:** Automatically scans for RPM files in the **Downloads** folder, or you can **drag** an RPM directly into the program window to install it from any location.
+- **🗑️ Remove Local and Layered RPMs:** Lists user-installed packages numerically for easy uninstall.
+- **↩️ Rollback:** Quickly revert the system to a previously selected state. 
 - **📌 Pin/Unpin Deployment:** Pin a stable deployment to prevent being removed during updates. It will remain in the GRUB entry until you unpin it.
 - **☑️ Status:** Check for layered packages, pending deployments and active system versioning.
 
