@@ -11,6 +11,7 @@
 [🇺🇸 English](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷 Português](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md)
 * [Tabela de Conteúdo](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#tabela-de-conteudo)
   - [Sobre e Funcionalidades](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#sobre-e-funcionalidades)
+  - [Funcionalidades](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#funcionalidades)
   - [Menu Principal](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#menu-principal)
   - [Demonstração de Uso](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#demonstraçao-de-uso)
   - [Destino dos Arquivos](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#destino-dos-arquivos)
@@ -18,9 +19,13 @@
   - [Desinstalação](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#desinstalaçao)
   - [Créditos e Licença](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#creditos-e-licença)
 
-## Sobre e Funcionalidades
+## Sobre
 
 RPM-OSTree Manager é uma ferramenta CLI simples e intuitiva para instalar e gerenciar pacotes RPM locais e layered em sistemas Fedora Atomic (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
+
+>Devido à base imutável dos sistemas atômicos, as camadas devem ser usadas apenas como último recurso. Priorize sempre a instalação de pacotes nesta ordem: Flatpak, containers e, por último, camadas (rpm-ostree).
+
+## Funcionalidades
 
 - **📦 Instalar RPM Local:** Busca automaticamente arquivos RPM na pasta **Downloads**, ou você pode **arrastar** um RPM diretamente para a janela do programa para instalá-lo de qualquer local.
 - **🗑️ Remover RPMs Locais e em Camadas:** Lista os pacotes instalados pelo usuário numericamente para facilitar a desinstalação.
@@ -31,7 +36,7 @@ RPM-OSTree Manager é uma ferramenta CLI simples e intuitiva para instalar e ger
 
 - **☑️ Status:** Verifica pacotes em camadas, implantações pendentes e versionamento ativo do sistema.
 
-💡 Informações:
+>💡 Informações:
 Uma implantação é a imagem completa do sistema (base + pacotes em camadas) listada no status do rpm-ostree, identificada por um índice (exemplo: 0). Fixá-la impede a remoção automática.
   
 ## Menu Principal
