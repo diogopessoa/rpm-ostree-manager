@@ -11,6 +11,7 @@
 [🇺🇸 English](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README.md) [🇧🇷 Português](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/README-BR.md) 
 * [Table of Contents](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#table-of-contents)
   - [About and Features](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#about-features)
+  - [Features](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#features)
   - [Main Menu](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#main-menu)
   - [Demo](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#demo)
   - [File Destination](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#file-destination)
@@ -19,9 +20,13 @@
   - [Credits and License](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#credits-and-license)
 
 
-## About and Features
+## About
 
 RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage local and layered RPM packages on Fedora Atomic systems (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
+
+>Due to the immutable base in atomic systems, layers should only be used as a last resort. Always prioritize installing packages in this order: Flatpak, containers, and finally layers (rpm-ostree).
+
+## Features 
 
 - **📦 Install Local RPM:** Automatically scans for RPM files in the **Downloads** folder, or you can **drag** an RPM directly into the program window to install it from any location.
 - **🗑️ Remove Local and Layered RPMs:** Lists user-installed packages numerically for easy uninstall.
