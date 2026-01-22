@@ -28,13 +28,13 @@ RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage loca
 
 ## Features 
 
-- **📦 Install Local RPM:** Automatically scans for RPM files in the **Downloads** folder, or you can **drag** an RPM directly into the program window to install it from any location.
+- **📦 Install Local RPM:** Scans for RPM packages in the **Downloads** folder and lists them numerically, or you can **drag** an RPM directly into the program window to install it from any location.
 - **🗑️ Remove Local and Layered RPMs:** Lists user-installed packages numerically for easy uninstall.
 - **↩️ Rollback:** Quickly revert the system to a previously selected state. 
 - **📌 Pin/Unpin Deployment:** Pin a stable deployment to prevent being removed during updates. It will remain in the GRUB entry until you unpin it.
 - **☑️ Status:** Check for layered packages, pending deployments and active system versioning.
 
-💡 Information:
+💡 *Information:*
 A deployment is the complete system image (base + layered packages) listed in rpm-ostree status, identified by an index (example: 0). Pinning it prevents automatic removal.
   
 ## Main Menu
