@@ -15,7 +15,7 @@
   - [Main Menu](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#main-menu)
   - [Demo](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#demo)
   - [File Destination](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#file-destination)
-  - [Installation (and update)](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#installation-(and-update))
+  - [Installation (and update)](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#installation-and-update)
   - [Uninstallation](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#uninstallation)
   - [Credits and License](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#credits-and-license)
 
