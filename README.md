@@ -15,7 +15,7 @@
   - [Main Menu](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#main-menu)
   - [Demo](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#demo)
   - [File Destination](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#file-destination)
-  - [Installation](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#installation)
+  - [Installation (and update)](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#installation-(and-update))
   - [Uninstallation](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#uninstallation)
   - [Credits and License](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#credits-and-license)
 
@@ -63,9 +63,9 @@ Destination Path
 
 ```
 
-## Installation
+## Installation (and update)
 
-Run the following command to install RPM-OSTree Manager automatically:
+Run the following command to install or update RPM-OSTree Manager automatically:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/install.sh | bash
