@@ -15,7 +15,7 @@
   - [Main Menu](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#main-menu)
   - [Demo](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#demo)
   - [File Destination](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#file-destination)
-  - [Installation (and update)](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#installation-and-update)
+  - [Installation](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#installation)
   - [Uninstallation](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#uninstallation)
   - [Credits and License](https://github.com/diogopessoa/rpm-ostree-manager/?tab=readme-ov-file#credits-and-license)
 
@@ -52,8 +52,6 @@ This demonstration shows only a portion of the features in action.
 
 This map shows where each file is placed on your system after running the installer:
 
-
-
 ```
 Destination Path
 
@@ -63,9 +61,8 @@ Destination Path
 
 ```
 
-## Installation (and update)
-
-Run the following command to install or update RPM-OSTree Manager automatically:
+## Installation
+Run the following command to install or update RPM-OSTree Manager:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/install.sh | bash
