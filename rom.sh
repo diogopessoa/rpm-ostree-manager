@@ -3,8 +3,21 @@
 # ==============================================================================
 # PROJECT: RPM-OSTree Manager
 # AUTHOR: Diogo Pessoa (https://github.com/diogopessoa/rpm-ostree-manager/)
-# VERSION: 0.1.5
+# VERSION: 0.1.6
 # ==============================================================================
+
+# --- Settings and Colors ---
+VERSION="0.1.6"
+REPO_URL="https://api.github.com/repos/diogopessoa/rpm-ostree-manager/releases/latest"
+REAL_USER=${SUDO_USER:-$USER}
+USER_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)
+DOWNLOADS_DIR="$USER_HOME/Downloads"
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+PURPLE='\033[0;35m'
+NC='\033[0m'
+BOLD='\033[1m'
 
 # --- Terminal Check (Force open in Ptyxis if launched from Menu) ---
 if [[ ! -t 0 ]]; then
@@ -16,21 +29,25 @@ if [[ ! -t 0 ]]; then
     exit
 fi
 
-# --- Settings and Colors ---
-REAL_USER=${SUDO_USER:-$USER}
-USER_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)
-DOWNLOADS_DIR="$USER_HOME/Downloads"
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-RED='\033[0;31m'
-PURPLE='\033[0;35m'
-NC='\033[0m'
-BOLD='\033[1m'
+check_update() {
+    # Get the latest version (timeout of 2s to avoid crashing the script)
+    LATEST_VERSION=$(curl -s --connect-timeout 2 "$REPO_URL" | jq -r '.tag_name' 2>/dev/null | sed 's/v//')
+
+    if [[ -n "$LATEST_VERSION" && "$LATEST_VERSION" != "null" ]]; then
+        if [[ "$LATEST_VERSION" != "$VERSION" ]]; then
+            echo -e "${PURPLE}${BOLD}✨ New version available: v$LATEST_VERSION${NC}"
+            echo -e "${PURPLE}Update at: github.com/diogopessoa/rpm-ostree-manager${NC}\n"
+        else
+            echo -e "${GREEN}✔ System up to date${NC}\n"
+        fi
+    fi
+}
 
 show_menu() {
     clear
     echo -e "${BLUE}╭────────────────────────────────────╮${NC}"
     echo -e "${GREEN}          ${BOLD}RPM-OSTree Manager${NC}"
+    echo -e "${BLUE}│               ${NC}v$VERSION${BLUE}               │${NC}"
     echo -e "${BLUE}╰────────────────────────────────────╯${NC}\n"
     echo -e "Welcome!"
     echo -e "\nChoose an option:"
@@ -126,7 +143,6 @@ rollback() {
     read -p "Do you want to revert to the previous state? (y/N): " confirm
     
     if [[ "$confirm" =~ ^[Yy]$ ]]; then
-        # O 'if' aqui verifica se o comando sudo funcionou
         if sudo rpm-ostree rollback; then
             echo -e "\n${GREEN}Rollback successful!${NC}"
             echo -e "${BLUE}-----------------------------------------------------------------------------------------------------------${NC}"
