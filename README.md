@@ -32,6 +32,7 @@ RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage loca
 - **🗑️ Remove Local and Layered RPMs:** Lists user-installed packages numerically for easy uninstall.
 - **↩️ Rollback:** Quickly revert the system to a previously selected state. 
 - **📌 Pin/Unpin Deployment:** Pin a stable deployment to prevent being removed during updates. It will remain in the GRUB entry until you unpin it.
+- **⚓ Switch Default Deployment:** Set any deployment as default (including pinned ones). This "anchors" your system to a specific version for future updates.
 - **☑️ Status:** Check for layered packages, pending deployments and active system versioning.
 
 💡 *Information:*
@@ -80,8 +81,9 @@ sudo rm /usr/local/bin/rom && rm ~/.local/share/applications/rpm-ostree-manager.
 
 ## Credits and License
 
-* **MIT License:** Licensed under the [MIT License](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/LICENSE).
-* **Icon:** The icon used is part of the [Kora Icons](https://github.com/bikass/kora) project, licensed under GPL-3.0.
+* **License:** [MIT](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/LICENSE).
+* **Icon:** The icon used is part of the [Kora Icons](https://github.com/bikass/kora) project.
+* **Fedora Docs:** Fedora Atomic Desktops User Guide [Updates, Upgrades & Rollbacks](https://docs.fedoraproject.org/en-US/atomic-desktops/)
 
 
 
