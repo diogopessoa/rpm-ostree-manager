@@ -3,11 +3,11 @@
 # ==============================================================================
 # PROJECT: RPM-OSTree Manager
 # AUTHOR: Diogo Pessoa (https://github.com/diogopessoa/rpm-ostree-manager/)
-# VERSION: 0.1.6
+# LICENSE: MIT
 # ==============================================================================
 
 # --- Settings and Colors ---
-VERSION="0.1.6"
+VERSION="0.1.7"
 REPO_URL="https://api.github.com/repos/diogopessoa/rpm-ostree-manager/releases/latest"
 REAL_USER=${SUDO_USER:-$USER}
 USER_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)
@@ -16,6 +16,7 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RED='\033[0;31m'
 PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
 NC='\033[0m'
 BOLD='\033[1m'
 
@@ -55,7 +56,9 @@ show_menu() {
     echo -e "2) ${RED}Remove${NC} Layered/Local RPM"
     echo -e "3) ${GREEN}Rollback:${NC} revert the system"
     echo -e "4) ${PURPLE}Pin/Unpin${NC} Deployment"
-    echo -e "5) Check Status"
+    echo -e "5) ${CYAN}Switch Default Deployment${NC}"
+    echo -e "6) Check Status"
+    echo -e "7) Documentation & Help"
     echo -e "0) Exit"
     echo -ne "\nOption: "
 }
@@ -183,7 +186,7 @@ pin_manager() {
 
         echo -ne "\nEnter number: "
         read -r num
-
+        
         # List deployments
         if [[ "$num" -gt 0 && "$num" -le ${#deploy_data[@]} ]]; then
             idx=$((num-1))
@@ -223,6 +226,66 @@ pin_manager() {
     fi
     read -p "Press Enter to Return..."
 }
+        
+switch_default_deployment() {
+    echo -e "\n--- ${BOLD}Switch Default Deployment${NC} ---"
+    echo "Select which deployment should be the default for the next boot:"
+    
+    mapfile -t deployments < <(rpm-ostree status --json | jq -r '.deployments[].version')
+    
+    if [ ${#deployments[@]} -eq 0 ]; then
+        echo -e "${RED}No deployments found.${NC}"
+    else
+        for i in "${!deployments[@]}"; do
+            echo -e "$((i+1))) ${BLUE}${deployments[$i]}${NC}"
+        done
+        echo "0) Cancel"
+        
+        read -rp "Enter number: " num
+        if [[ "$num" -gt 0 && "$num" -le ${#deployments[@]} ]]; then
+            idx=$((num-1))
+            selected="${deployments[$idx]}"
+            if sudo ostree admin set-default "$idx"; then
+                echo -e "${GREEN}Success! Deployment $selected is now the default.${NC}"
+                echo "Please reboot to start the selected version."
+            else
+                echo -e "${RED}Failed to set default deployment.${NC}"
+            fi
+        fi
+    fi
+    read -p "Press Enter to Return..."
+}
+    
+show_help() {
+    clear
+    echo -e "${BLUE}╭──────────────────────────────────────────────────────────╮${NC}"
+    echo -e "${BLUE}│${NC}                ${BOLD}QUICK DOCUMENTATION & HELP${NC}                ${BLUE}│${NC}"
+    echo -e "${BLUE}╰──────────────────────────────────────────────────────────╯${NC}\n"
+
+    echo -e "${BLUE}1) Install:${NC} Supports ${BOLD}Drag & Drop${NC} of .rpm files or selecting"
+    echo -e "   files automatically detected in your Downloads folder."
+
+    echo -e "\n${RED}2) Remove:${NC} Lists your layered packages numerically."
+    echo -e "   The tool automatically cleans version tags for safe removal."
+
+    echo -e "\n${GREEN}3) Rollback:${NC} Quick temporary 'Emergency Exit'."
+    echo -e "   Swaps current deployment with previous on next boot, reverting recent changes until stabilized or upgraded."
+
+    echo -e "\n${PURPLE}4) Pin/Unpin:${NC} Pinned deployments are ${BOLD}locked${NC} and protected"
+    echo -e "   from being automatically deleted by the system."
+
+    echo -e "\n${CYAN}5) Switch Default:${NC} Sets a specific version as the new ${BLUE}Anchor${NC}." 
+    echo -e "   Future updates will grow from this chosen deployment."
+
+    echo -e "\n${BOLD}6) Status:${NC} Shows the detailed technical state of your OS."
+
+    echo -e "\n${BLUE}────────────────────────────────────────────────────────────${NC}"
+    echo -e "${BOLD}For the complete guide, visit:${NC}"
+    echo -e "https://github.com/diogopessoa/rpm-ostree-manager/wiki"
+    echo -e "${BLUE}────────────────────────────────────────────────────────────${NC}\n"
+
+    read -p "Press Enter to return to menu..."
+}
 
 # --- Main Loop ---
 while true; do
@@ -233,12 +296,14 @@ while true; do
         2) remove_rpm ;;
         3) rollback ;;
         4) pin_manager ;;
-        5) clear; rpm-ostree status; echo ""; read -p "Press Enter to Return..." ;;
-        0)
+        5) switch_default_deployment ;;
+        6) clear; rpm-ostree status; echo ""; read -p "Press Enter to Return..." ;; 
+        7) show_help ;; # REMOVIDO o read daqui, pois já existe dentro da função
+        0)      
             clear
             echo
             echo -e "    Follow for updates:"
-            echo -e "    github.com/diogopessoa/rpm-ostree-manager"
+            echo -e "    https://github.com/diogopessoa/rpm-ostree-manager"
             echo -e "${BLUE}---------------------------------------------${NC}"
             exit 0 
             ;;
