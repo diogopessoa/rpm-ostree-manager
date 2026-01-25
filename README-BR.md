@@ -33,6 +33,7 @@ RPM-OSTree Manager é uma ferramenta CLI simples e intuitiva para instalar e ger
 - **↩️ Reverter:** Reverte rapidamente o sistema para um estado previamente selecionado.
 
 - **📌 Fixar/Desafixar Implantação:** Fixe uma implantação estável para evitar que seja removida durante as atualizações. Ela permanecerá na entrada do GRUB até que você a desafixe.
+- **⚓ Alterar Implantação Padrão:** Defina qualquer implantação como padrão (incluindo as fixadas). Isso "ancora" seu sistema a uma versão específica para atualizações futuras.
 
 - **☑️ Status:** Verifica pacotes em camadas, implantações pendentes e versionamento ativo do sistema.
 
@@ -40,7 +41,7 @@ RPM-OSTree Manager é uma ferramenta CLI simples e intuitiva para instalar e ger
 Uma implantação é a imagem completa do sistema (base + pacotes em camadas) listada no status do rpm-ostree, identificada por um índice (exemplo: 0). Fixá-la impede a remoção automática.
   
 ## Menu Principal
-![main_menu](screenshots/main_menu_v2.png)
+![main_menu](screenshots/main_menu_v3.png)
 
 ## Demonstração de Uso
 
@@ -65,7 +66,7 @@ Caminho de destino
 
 ## Como instalar
 
-Execute o seguinte comando para instalar o RPM-OSTree Manager automaticamente:
+Execute o seguinte comando para *instalar* ou *atualizar* o RPM-OSTree Manager:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/install.sh | bash
@@ -83,7 +84,8 @@ sudo rm /usr/local/bin/rom && rm ~/.local/share/applications/rpm-ostree-manager.
 
 ## Créditos e Licença
 
-* **MIT License:** Licenciado sob a [MIT License](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/LICENSE).
-* **Ícone:** Faz parte do projeto [Kora Icons](https://github.com/bikass/kora), licenciado sob a GPL-3.0.
+* **Licença:** [MIT](https://github.com/diogopessoa/rpm-ostree-manager/blob/main/LICENSE).
+* **Ícone:** Faz parte do projeto [Kora Icons](https://github.com/bikass/kora).
+* **Fedora Docs:** Guia do usuário Fedora Atomic Desktops [Updates, Upgrades & Rollbacks](https://docs.fedoraproject.org/en-US/atomic-desktops/)
 
 
