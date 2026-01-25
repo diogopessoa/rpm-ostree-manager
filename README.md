@@ -39,7 +39,7 @@ RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage loca
 A deployment is the complete system image (base + layered packages) listed in rpm-ostree status, identified by an index (example: 0). Pinning it prevents automatic removal.
   
 ## Main Menu
-![main_menu](screenshots/main_menu_v2.png)
+![main_menu](screenshots/main_menu_v3.png)
 
 ## Demo
 
