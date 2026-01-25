@@ -7,11 +7,13 @@
 # ==============================================================================
 
 # --- Settings and Colors ---
-VERSION="0.1.7"
-REPO_URL="https://api.github.com/repos/diogopessoa/rpm-ostree-manager/releases/latest"
+VERSION="0.1.8"
+REPO_API_URL="https://api.github.com/repos/diogopessoa/rpm-ostree-manager/releases"
 REAL_USER=${SUDO_USER:-$USER}
 USER_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)
 DOWNLOADS_DIR="$USER_HOME/Downloads"
+
+# Colors
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RED='\033[0;31m'
@@ -31,12 +33,12 @@ if [[ ! -t 0 ]]; then
 fi
 
 check_update() {
-    # Get the latest version (timeout of 2s to avoid crashing the script)
-    LATEST_VERSION=$(curl -s --connect-timeout 2 "$REPO_URL" | jq -r '.tag_name' 2>/dev/null | sed 's/v//')
+    # Fetches the first tag from the releases list to avoid cache issues
+    LATEST_VERSION=$(curl -s --connect-timeout 2 "$REPO_API_URL" | jq -r '.[0].tag_name' 2>/dev/null | sed 's/v//' | xargs)
 
     if [[ -n "$LATEST_VERSION" && "$LATEST_VERSION" != "null" ]]; then
         if [[ "$LATEST_VERSION" != "$VERSION" ]]; then
-            echo -e "${PURPLE}${BOLD}✨ New version available: v$LATEST_VERSION${NC}"
+            echo -e "${PURPLE}${BOLD}New version available: v$LATEST_VERSION${NC}"
             echo -e "${PURPLE}Update at: github.com/diogopessoa/rpm-ostree-manager${NC}\n"
         else
             echo -e "${GREEN}✔ System up to date${NC}\n"
@@ -47,24 +49,34 @@ check_update() {
 show_menu() {
     clear
     echo -e "${BLUE}╭────────────────────────────────────╮${NC}"
-    echo -e "${GREEN}          ${BOLD}RPM-OSTree Manager${NC}"
+    echo -e "${GREEN}│          ${BOLD}RPM-OSTree Manager        │${NC}"
     echo -e "${BLUE}│               ${NC}v$VERSION${BLUE}               │${NC}"
     echo -e "${BLUE}╰────────────────────────────────────╯${NC}\n"
     echo -e "Welcome!"
     echo -e "\nChoose an option:"
-    echo -e "1) ${BLUE}Install${NC} Local RPM (Downloads)"
-    echo -e "2) ${RED}Remove${NC} Layered/Local RPM"
-    echo -e "3) ${GREEN}Rollback:${NC} revert the system"
-    echo -e "4) ${PURPLE}Pin/Unpin${NC} Deployment"
-    echo -e "5) ${CYAN}Switch Default Deployment${NC}"
-    echo -e "6) Check Status"
-    echo -e "7) Documentation & Help"
-    echo -e "0) Exit"
+    echo -e ""
+    echo -e "1) 📦 ${BLUE}Install${NC} Local RPM (Downloads)"
+    echo -e ""
+    echo -e "2) 🗑️  ${RED}Remove${NC} Layered/Local RPM"
+    echo -e ""
+    echo -e "3) ↩️  ${GREEN}Rollback:${NC} revert the system"
+    echo ""
+    echo -e "4) 📌 ${PURPLE}Pin/Unpin${NC} Deployment"
+    echo ""
+    echo -e "5) ⚓ ${CYAN}Switch Default Deployment${NC}"
+    echo -e ""
+    echo -e "6) ☑️  Check Status"
+    echo -e ""
+    echo -e "7) 🛟 Documentation & Help"
+    echo -e ""
+    echo -e "0) ✖️  Exit"
+    echo -e ""
     echo -ne "\nOption: "
 }
 
 install_rpm() {
     echo -e "\n--- ${BLUE}Install Local RPM${NC} ---"
+    echo -e ""
     cd "$DOWNLOADS_DIR" || return
     
     # List .rpm files and store in an array
@@ -104,8 +116,8 @@ install_rpm() {
 
 remove_rpm() {
     echo -e "\n--- ${RED}Remove Layered / Local RPM${NC} ---"
-    echo "Searching for packages..."
-    
+    echo -e ""
+        
     # Searches all possible keys store packages
     packages=$(rpm-ostree status --json | jq -r '.deployments[] | select(.booted == true) | 
         (.packages // []) + 
@@ -143,6 +155,7 @@ remove_rpm() {
 
 rollback() {
     echo -e "\n--- ${GREEN}System Rollback${NC} ---"
+    echo -e ""
     read -p "Do you want to revert to the previous state? (y/N): " confirm
     
     if [[ "$confirm" =~ ^[Yy]$ ]]; then
@@ -163,7 +176,7 @@ rollback() {
 
 pin_manager() {
     echo -e "\n--- ${PURPLE}Pin/Unpin Deployment Manager${NC} ---"
-    echo "Fetching deployments..."
+    # echo "Fetching deployments..."
 
     # Extracts version and state from 'pinned'
     mapfile -t deploy_data < <(rpm-ostree status --json | jq -r '.deployments[] | "\(.version)|\(.pinned)"')
@@ -228,7 +241,8 @@ pin_manager() {
 }
         
 switch_default_deployment() {
-    echo -e "\n--- ${BOLD}Switch Default Deployment${NC} ---"
+    echo -e "\n--- ${CYAN}Switch Default Deployment${NC} ---"
+    echo -e ""
     echo "Select which deployment should be the default for the next boot:"
     
     mapfile -t deployments < <(rpm-ostree status --json | jq -r '.deployments[].version')
