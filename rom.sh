@@ -70,7 +70,6 @@ show_menu() {
     echo -e "7) 🛟 Documentation & Help"
     echo -e ""
     echo -e "0) ✖️  Exit"
-    echo -e ""
     echo -ne "\nOption: "
 }
 
