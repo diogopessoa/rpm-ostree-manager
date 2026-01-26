@@ -51,9 +51,8 @@ show_menu() {
     echo -e "${BLUE}╭────────────────────────────────────╮${NC}"
     echo -e "${GREEN}│          ${BOLD}RPM-OSTree Manager        │${NC}"
     echo -e "${BLUE}│               ${NC}v$VERSION${BLUE}               │${NC}"
-    echo -e "${BLUE}╰────────────────────────────────────╯${NC}\n"
-    echo -e "Welcome!"
-    echo -e "\nChoose an option:"
+    echo -e "${BLUE}╰────────────────────────────────────╯${NC}"
+    echo -e "\nWelcome! Choose an option:"
     echo -e ""
     echo -e "1) 📦 ${BLUE}Install${NC} Local RPM (Downloads)"
     echo -e ""
@@ -281,8 +280,8 @@ show_help() {
     echo -e "\n${RED}2) Remove:${NC} Lists your layered packages numerically."
     echo -e "   The tool automatically cleans version tags for safe removal."
 
-    echo -e "\n${GREEN}3) Rollback:${NC} Quick temporary 'Emergency Exit'."
-    echo -e "   Swaps current deployment with previous on next boot, reverting recent changes until stabilized or upgraded."
+    echo -e "\n${GREEN}3) Rollback:${NC} Swaps current deployment with previous on next boot,"
+    echo -e "   reverting recent changes until stabilized or upgraded."
 
     echo -e "\n${PURPLE}4) Pin/Unpin:${NC} Pinned deployments are ${BOLD}locked${NC} and protected"
     echo -e "   from being automatically deleted by the system."
