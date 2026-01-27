@@ -41,13 +41,18 @@ A deployment is the complete system image (base + layered packages) listed in rp
 ## Main Menu
 ![main_menu](screenshots/main_menu_v3.png)
 
-## Demo
+## Demonstration
 
+### Brief Overview Demo
 <video src="https://github.com/user-attachments/assets/70e30d2d-cc4a-4772-8974-a99d58d4aaa8" width="100%" controls title="RPM-OSTree Manager Demo">
   Your browser does not support the video tag.
 </video>
 
-This demonstration shows only a portion of the features in action.
+### Installing local RPM Demo
+<video src="https://github.com/user-attachments/assets/28b7146e-b3f1-47a5-a333-b4450cceef2f" width="100%" controls title="Installing local RPM Demo">
+  Your browser does not support the video tag.
+
+These demonstrations shows only a portion of the features in action.
 
 ## File Destination
 
