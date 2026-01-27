@@ -51,6 +51,7 @@ A deployment is the complete system image (base + layered packages) listed in rp
 ### Installing local RPM Demo
 <video src="https://github.com/user-attachments/assets/28b7146e-b3f1-47a5-a333-b4450cceef2f" width="100%" controls title="Installing local RPM Demo">
   Your browser does not support the video tag.
+</video>
 
 These demonstrations shows only a portion of the features in action.
 
