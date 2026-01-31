@@ -41,11 +41,17 @@ RPM-OSTree Manager é uma ferramenta CLI simples e intuitiva para instalar e ger
 Uma implantação é a imagem completa do sistema (base + pacotes em camadas) listada no status do rpm-ostree, identificada por um índice (exemplo: 0). Fixá-la impede a remoção automática.
   
 ## Menu Principal
-![main_menu](screenshots/main_menu_v3.png)
+![main_menu](screenshots/main_menu_v0.1.8.png)
 
 ## Demonstração de Uso
 
+### Breve Demonstração Geral
 <video src="https://github.com/user-attachments/assets/70e30d2d-cc4a-4772-8974-a99d58d4aaa8" width="100%" controls title="RPM-OSTree Manager Demo">
+  Your browser does not support the video tag.
+</video>
+
+### Demonstração de Instalação de Pacote RPM local
+<video src="https://github.com/user-attachments/assets/2ce23647-84cd-4c19-ad6b-a00d98411242" width="100%" controls title="Installing local RPM Demo">
   Your browser does not support the video tag.
 </video>
 
