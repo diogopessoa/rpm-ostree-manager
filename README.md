@@ -22,7 +22,7 @@
 
 ## About
 
-RPM-OSTree Manager is a simple and intuitive CLI tool to install and manage local and layered RPM packages on Fedora Atomic systems (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
+RPM-OSTree Manager is a simple and intuitive CLI tool to install/remove and manage RPM packages and deployment on Fedora Atomic systems (Silverblue, Kinoite, Bluefin, Bazzite, Aurora).
 
 >Due to the immutable base in atomic systems, layers should only be used as a last resort. Always prioritize installing packages in this order: Flatpak, containers, and finally layers (rpm-ostree).
 
