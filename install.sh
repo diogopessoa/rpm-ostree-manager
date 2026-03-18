@@ -40,8 +40,12 @@ mkdir -p "$(dirname "$DESKTOP_PATH")"
 
 # 3. Download the main script (rom.sh)
 echo "Downloading main script..."
-curl -fsSL "https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/rom.sh" -o "$BIN_PATH"
-chmod +x "$BIN_PATH"
+
+SUDO=""
+[ "$IS_ROOT" = false ] && SUDO="sudo"
+
+$SUDO curl -fL "https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/rom.sh" -o "$BIN_PATH"
+$SUDO chmod +x "$BIN_PATH"
 
 # 4. Download icon from repository
 echo "Downloading icon..."
