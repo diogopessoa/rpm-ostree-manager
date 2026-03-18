@@ -44,6 +44,8 @@ echo "Downloading main script..."
 SUDO=""
 [ "$IS_ROOT" = false ] && SUDO="sudo"
 
+$SUDO mkdir -p "$(dirname "$BIN_PATH")"
+
 $SUDO curl -fL "https://raw.githubusercontent.com/diogopessoa/rpm-ostree-manager/main/rom.sh" -o "$BIN_PATH"
 $SUDO chmod +x "$BIN_PATH"
 
@@ -64,8 +66,14 @@ Type=Application
 Categories=System;
 EOF
 
-# Refresh icon cache and desktop database (optional but recommended)
-update-desktop-database ~/.local/share/applications/ 2>/dev/null
+# Refresh icon cache and desktop database
+if command -v update-desktop-database >/dev/null; then
+  if [ "$IS_ROOT" = true ]; then
+    update-desktop-database /usr/share/applications 2>/dev/null || true
+  else
+    update-desktop-database "$USER_HOME/.local/share/applications" 2>/dev/null || true
+  fi
+fi
 
 echo -e "${GREEN}Installation completed successfully!${NC}"
 echo "You can now find 'RPM-OSTree Manager' in your application menu or type 'rom' in the terminal."
