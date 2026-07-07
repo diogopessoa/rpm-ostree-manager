@@ -58,7 +58,7 @@ show_menu() {
     echo -e ""
     echo -e "2) 🗑️  Remove Layered/Local RPM"
     echo -e ""
-    echo -e "3) ↩️  Rollback: revert the system"
+    echo -e "3) ↩️  Rollback to Previous State"
     echo ""
     echo -e "4) 📌 Pin/Unpin Deployment"
     echo ""
@@ -160,6 +160,7 @@ rollback() {
         if sudo rpm-ostree rollback; then
             echo -e "\n${GREEN}Rollback successful!${NC}"
             echo -e "${BLUE}-----------------------------------------------------------------------------------------------------------${NC}"
+            echo -e "Restart the system to use the selected deployment as the default."
             echo -e "If the Rollback occurred after updates broke the system, disable them temporarily until fixes are released."
         else
             echo -e "\n${RED}Rollback failed or was cancelled by the system.${NC}"
@@ -310,13 +311,13 @@ while true; do
         4) pin_manager ;;
         5) switch_default_deployment ;;
         6) clear; rpm-ostree status; echo ""; read -p "Press Enter to Return..." ;; 
-        7) show_help ;; # REMOVIDO o read daqui, pois já existe dentro da função
+        7) show_help ;; 
         0)      
             clear
             echo
             echo -e "    Follow for updates:"
             echo -e "    https://github.com/diogopessoa/rpm-ostree-manager"
-            echo -e "${BLUE}---------------------------------------------${NC}"
+            echo -e "    ${BLUE}-------------------------------------------------${NC}"
             exit 0 
             ;;
         *)
