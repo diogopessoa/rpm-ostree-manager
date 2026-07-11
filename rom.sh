@@ -48,28 +48,23 @@ check_update() {
 
 show_menu() {
     clear
-    echo -e "${BLUE}╭────────────────────────────────────╮${NC}"
-    echo -e "${GREEN}│          ${BOLD}RPM-OSTree Manager        │${NC}"
-    echo -e "${BLUE}│               ${NC}v$VERSION${BLUE}               │${NC}"
-    echo -e "${BLUE}╰────────────────────────────────────╯${NC}"
-    echo -e "\nWelcome! Choose an option:"
-    echo -e ""
-    echo -e "1) 📦 Install Local RPM (Downloads)"
-    echo -e ""
-    echo -e "2) 🗑️  Remove Layered/Local RPM"
-    echo -e ""
-    echo -e "3) ↩️  Rollback to Previous State"
-    echo ""
-    echo -e "4) 📌 Pin/Unpin Deployment"
-    echo ""
-    echo -e "5) ⚓ Switch Default Deployment"
-    echo -e ""
-    echo -e "6) ☑️  Check Status"
-    echo -e ""
-    echo -e "7) 🛟 Documentation & Help"
-    echo -e ""
-    echo -e "0) ✖️  Exit"
-    echo -ne "\nOption: "
+    echo "======================================"
+    echo -e "        ${BOLD}RPM-OSTree Manager${NC}"
+    echo "            Version $VERSION"
+    echo "======================================"
+    echo
+    echo "[1] 📦 Install Local RPM (Downloads)"
+    echo "[2] 🗑️  Remove Layered/Local RPM"
+    echo "[3] ↩️  Rollback to Previous State"
+    echo "[4] 📌 Pin/Unpin Deployment"
+    echo "[5] ⚓ Switch Default Deployment"
+    echo "[6] ☑️  Check Status"
+    echo "[7] 🛟 Documentation & Help"
+    echo "[0] ✖️  Exit"
+    
+    echo
+    echo -e "${BLUE}────────────────────────────────────${NC}"
+    echo -ne "${GREEN}Option:${NC} "
 }
 
 install_rpm() {
