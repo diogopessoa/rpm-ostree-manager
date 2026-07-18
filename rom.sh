@@ -64,7 +64,7 @@ show_menu() {
     
     echo
     echo -e "${BLUE}────────────────────────────────────${NC}"
-    echo -ne "${GREEN}Option:${NC} "
+    echo -ne "${GREEN}Option:[0-7]${NC} "
 }
 
 install_rpm() {
