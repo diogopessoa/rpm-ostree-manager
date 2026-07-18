@@ -313,6 +313,8 @@ while true; do
             echo -e "    Follow for updates:"
             echo -e "    https://github.com/diogopessoa/rpm-ostree-manager"
             echo -e "    ${BLUE}-------------------------------------------------${NC}"
+            echo 
+            read -p "    Press Enter to Exit..."
             exit 0 
             ;;
         *)
