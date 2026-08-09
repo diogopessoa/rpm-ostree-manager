@@ -1,3 +1,5 @@
+**Notice:** RPM-OSTree is being replaced by Bootc in new versions of Fedora Atomic. With this in mind, I created a new CLI program called [Bootc Manager](https://github.com/diogopessoa/bootc-manager) to align with these new technologies. RPM-OSTree Manager will be discontinued.
+
 <p align="center">
   <img src="slogan-rom.png" alt="RPM-OSTree Manager Slogan" width="100%">
 </p>
